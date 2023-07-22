@@ -2,13 +2,21 @@
 import HelloWorld from "./components/HelloWorld.vue";
 import List from "./components/List.vue";
 import Input from "./components/Input.vue";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 
 const contacts = ref([
   { id: 1, name: "Bohdan", email: "bdn@gmail.com", done: true },
   { id: 2, name: "John", email: "bdn@gmail.com", done: true },
   { id: 3, name: "Bill", email: "bdn@gmail.com", done: false },
 ]);
+
+const hideCompleted = ref(false);
+
+const filteredContacts = computed(() => {
+  return hideCompleted.value
+    ? contacts.value.filter((el) => !el.done)
+    : contacts.value;
+});
 
 const handleUserDelete = (id: number) => {
   contacts.value = contacts.value.filter((contact) => contact.id !== id);
@@ -22,12 +30,16 @@ const addUser = (name: string) => {
     done: false,
   });
 };
+
+const hide = (visibility: boolean) => {
+  hideCompleted.value = visibility;
+};
 </script>
 
 <template>
   <HelloWorld msg="Vite + Vue" />
-  <Input @addUser="addUser" />
-  <List :data="contacts" @deleteUser="handleUserDelete" />
+  <Input @addUser="addUser" :visibility="hideCompleted" @hide="hide" />
+  <List :data="filteredContacts" @deleteUser="handleUserDelete" />
 </template>
 
 <style scoped></style>

@@ -8,6 +8,7 @@ const handleDelete = (id: number) => emit("deleteUser", id);
 
 <template>
   <li class="list-items text" v-for="el in data" :key="el.id">
+    <input type="checkbox" v-model="el.done" />
     <p class="text">{{ el.name }}</p>
     <p class="text">{{ el.email }}</p>
     <button class="btn" @click="handleDelete(el.id)">Delete</button>
