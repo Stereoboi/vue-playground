@@ -45,7 +45,7 @@ fetchData();
 </script>
 
 <template>
-  <!-- <HelloWorld msg="Vite + Vue" /> -->
+  <HelloWorld msg="Vite + Vue" />
   <Input @addUser="addUser" :visibility="hideCompleted" @hide="hide" />
   <List :data="filteredContacts" @deleteUser="handleUserDelete" />
 </template>
