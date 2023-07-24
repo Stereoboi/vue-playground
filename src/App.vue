@@ -2,7 +2,7 @@
 import HelloWorld from "./components/HelloWorld.vue";
 import List from "./components/List.vue";
 import Input from "./components/Input.vue";
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 
 const contacts = ref([
   { id: 1, name: "Bohdan", email: "bdn@gmail.com", done: true },
@@ -34,10 +34,18 @@ const addUser = (name: string) => {
 const hide = (visibility: boolean) => {
   hideCompleted.value = visibility;
 };
+
+async function fetchData() {
+  const res = await fetch(`https://api.adviceslip.com/advice`);
+  const result = await res.json();
+  console.log(result);
+}
+
+fetchData();
 </script>
 
 <template>
-  <HelloWorld msg="Vite + Vue" />
+  <!-- <HelloWorld msg="Vite + Vue" /> -->
   <Input @addUser="addUser" :visibility="hideCompleted" @hide="hide" />
   <List :data="filteredContacts" @deleteUser="handleUserDelete" />
 </template>
