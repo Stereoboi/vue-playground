@@ -2,7 +2,7 @@
 import HelloWorld from "./components/HelloWorld.vue";
 import List from "./components/List.vue";
 import Input from "./components/Input.vue";
-import { ref, computed, watch } from "vue";
+import { ref, computed } from "vue";
 
 const contacts = ref([
   { id: 1, name: "Bohdan", email: "bdn@gmail.com", done: true },
